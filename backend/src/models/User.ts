@@ -7,6 +7,9 @@ export interface IUser extends Document {
   role: 'Admin' | 'Manager' | 'Analyst' | 'Member';
   organizationId?: mongoose.Types.ObjectId;
   refreshTokens: string[];
+  // Password reset
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -18,7 +21,10 @@ const UserSchema = new Schema<IUser>(
     name: { type: String, required: true, trim: true },
     role: { type: String, enum: ['Admin', 'Manager', 'Analyst', 'Member'], default: 'Analyst' },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization', index: true },
-    refreshTokens: [{ type: String }]
+    refreshTokens: [{ type: String }],
+    // Password reset fields (hashed token + expiry)
+    passwordResetToken: { type: String, select: false },
+    passwordResetExpires: { type: Date, select: false }
   },
   { timestamps: true }
 );

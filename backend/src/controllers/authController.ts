@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { User } from '../models/User';
 import { Organization } from '../models/Organization';
-import { hashPassword, comparePassword, generateTokens, verifyRefreshToken } from '../utils/security';
+import { hashPassword, comparePassword, generateTokens, verifyRefreshToken, sha256 } from '../utils/security';
 import { registerSchema, loginSchema, refreshTokenSchema, forgotPasswordSchema, resetPasswordSchema } from '../validators/authValidator';
 import { logAuditEvent } from '../services/auditService';
 import { AuthRequest } from '../middleware/authMiddleware';
@@ -226,8 +226,50 @@ export async function getMe(req: AuthRequest, res: Response, next: NextFunction)
 export async function forgotPassword(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { email } = forgotPasswordSchema.parse(req.body);
-    // Secure pattern: Always return generic message so user enumeration is prevented
-    res.json({ message: 'If an account exists with that email, a password reset link has been dispatched.' });
+
+    // Always return same message to prevent user enumeration
+    const GENERIC_MSG = 'If an account exists with that email, a password reset link has been dispatched.';
+
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) {
+      res.json({ message: GENERIC_MSG });
+      return;
+    }
+
+    // Generate a cryptographically secure reset token
+    const crypto = (await import('crypto')).default;
+    const rawToken = crypto.randomBytes(32).toString('hex');
+    const hashedToken = sha256(rawToken);
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+    // Store hashed token + expiry on user document
+    await User.findByIdAndUpdate(user._id, {
+      passwordResetToken: hashedToken,
+      passwordResetExpires: expiresAt
+    });
+
+    // In production: email this link via SendGrid/Resend/SES
+    // For local dev / testing: return the token so the dev can use it
+    const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${rawToken}&email=${encodeURIComponent(email)}`;
+    console.log(`[Auth] Password reset link for ${email}: ${resetUrl}`);
+
+    await logAuditEvent({
+      userId: user._id.toString(),
+      userEmail: user.email,
+      orgId: user.organizationId?.toString(),
+      action: 'PASSWORD_RESET_REQUESTED',
+      resource: 'auth',
+      requestId: (req.headers['x-request-id'] as string) || 'forgot-pw',
+      ipAddress: req.ip
+    });
+
+    res.json({
+      message: GENERIC_MSG,
+      // Only expose in non-production for developer convenience
+      ...(process.env.NODE_ENV !== 'production' && {
+        _dev_resetUrl: resetUrl
+      })
+    });
   } catch (err) {
     next(err);
   }
@@ -235,8 +277,42 @@ export async function forgotPassword(req: Request, res: Response, next: NextFunc
 
 export async function resetPassword(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    resetPasswordSchema.parse(req.body);
-    res.json({ message: 'Password has been successfully updated.' });
+    const { token, email, newPassword } = resetPasswordSchema.parse(req.body);
+
+    const hashedToken = sha256(token);
+
+    // Find user with matching token that has not expired
+    const user = await User.findOne({
+      email: email.toLowerCase(),
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: new Date() }
+    }).select('+passwordResetToken +passwordResetExpires');
+
+    if (!user) {
+      res.status(400).json({ error: 'Invalid or expired password reset token. Please request a new reset link.' });
+      return;
+    }
+
+    // Hash new password and clear reset token
+    const newHash = await hashPassword(newPassword);
+    await User.findByIdAndUpdate(user._id, {
+      passwordHash: newHash,
+      passwordResetToken: undefined,
+      passwordResetExpires: undefined,
+      refreshTokens: [] // Invalidate all existing sessions
+    });
+
+    await logAuditEvent({
+      userId: user._id.toString(),
+      userEmail: user.email,
+      orgId: user.organizationId?.toString(),
+      action: 'PASSWORD_RESET_COMPLETED',
+      resource: 'auth',
+      requestId: (req.headers['x-request-id'] as string) || 'reset-pw',
+      ipAddress: req.ip
+    });
+
+    res.json({ message: 'Password has been successfully updated. Please sign in with your new credentials.' });
   } catch (err) {
     next(err);
   }

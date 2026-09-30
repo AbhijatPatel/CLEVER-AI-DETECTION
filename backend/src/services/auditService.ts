@@ -16,7 +16,9 @@ export interface LogAuditParams {
     | 'FILE_DELETED'
     | 'USER_CREATED'
     | 'ROLE_CHANGED'
-    | 'API_KEY_CREATED';
+    | 'API_KEY_CREATED'
+    | 'PASSWORD_RESET_REQUESTED'
+    | 'PASSWORD_RESET_COMPLETED';
   resource: string;
   requestId: string;
   ipAddress?: string;

@@ -62,8 +62,8 @@ export default function Sidebar({ className }: SidebarProps) {
       {/* Brand header */}
       <div className="h-20 px-6 flex items-center border-b border-slate-900 shrink-0">
         <Link href="/" className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center shadow-glow">
-            <ShieldCheck className="w-5 h-5 text-white" />
+          <div className="w-9 h-9 rounded-xl overflow-hidden border border-cyan-500/30 shadow-glow bg-slate-950 flex items-center justify-center shrink-0">
+            <img src="/logo.jpg" alt="CLEVER AI Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="font-bold text-lg tracking-wider text-white">CLEVER</span>
@@ -128,8 +128,8 @@ export default function Sidebar({ className }: SidebarProps) {
       {/* Mobile Top Bar */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-slate-950/95 backdrop-blur border-b border-slate-900 flex items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center">
-            <ShieldCheck className="w-4 h-4 text-white" />
+          <div className="w-8 h-8 rounded-xl overflow-hidden border border-cyan-500/30 shadow-glow bg-slate-950 flex items-center justify-center shrink-0">
+            <img src="/logo.jpg" alt="CLEVER AI Logo" className="w-full h-full object-cover" />
           </div>
           <span className="font-bold text-base tracking-wider text-white">
             CLEVER <span className="text-cyan-400">AI</span>

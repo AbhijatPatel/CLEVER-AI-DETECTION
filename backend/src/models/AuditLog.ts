@@ -17,7 +17,9 @@ export interface IAuditLog extends Document {
     | 'FILE_DELETED'
     | 'USER_CREATED'
     | 'ROLE_CHANGED'
-    | 'API_KEY_CREATED';
+    | 'API_KEY_CREATED'
+    | 'PASSWORD_RESET_REQUESTED'
+    | 'PASSWORD_RESET_COMPLETED';
   resource: string;
   requestId: string;
   ipAddress?: string;
@@ -36,7 +38,8 @@ const AuditLogSchema = new Schema<IAuditLog>(
         'LOGIN', 'LOGOUT', 'FILE_UPLOAD', 'ANALYSIS_CREATED',
         'ANALYSIS_STARTED', 'ANALYSIS_COMPLETED', 'ANALYSIS_FAILED',
         'REPORT_GENERATED', 'FILE_DELETED', 'USER_CREATED',
-        'ROLE_CHANGED', 'API_KEY_CREATED'
+        'ROLE_CHANGED', 'API_KEY_CREATED',
+        'PASSWORD_RESET_REQUESTED', 'PASSWORD_RESET_COMPLETED'
       ],
       required: true,
       index: true

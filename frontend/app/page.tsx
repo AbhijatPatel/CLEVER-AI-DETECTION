@@ -54,10 +54,10 @@ export default function LandingPage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/analyze"
+                href="/demo"
                 className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold hover:from-cyan-400 hover:to-indigo-500 transition-all shadow-glow hover:shadow-cyan-500/40 text-base"
               >
-                Start Free Analysis
+                Try Free Demo
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link

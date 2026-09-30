@@ -7,10 +7,10 @@ def run_test():
     
     # 1. Register or Login
     reg_payload = json.dumps({
-        "email": "chief.investigator@forensics.org",
-        "password": "MasterPassword2026!",
-        "name": "Dr. Katherine Price",
-        "organizationName": "National Digital Forensics Unit"
+        "email": "verifier@forensics-lab.org",
+        "password": "VerifyPass2026!",
+        "name": "Automated Verifier",
+        "organizationName": "Platform QA Unit"
     })
     conn.request("POST", "/api/v1/auth/register", reg_payload, {"Content-Type": "application/json"})
     res = conn.getresponse()
@@ -20,14 +20,17 @@ def run_test():
     if not token:
         # User already registered, try login
         login_payload = json.dumps({
-            "email": "chief.investigator@forensics.org",
-            "password": "MasterPassword2026!"
+            "email": "verifier@forensics-lab.org",
+            "password": "VerifyPass2026!"
         })
+        conn = http.client.HTTPConnection("localhost", 5000)
         conn.request("POST", "/api/v1/auth/login", login_payload, {"Content-Type": "application/json"})
         res = conn.getresponse()
         login_data = json.loads(res.read().decode())
         token = login_data.get("accessToken")
         user = login_data.get("user")
+        if not user:
+            raise AssertionError(f"Login failed: {login_data}")
         print(f"[1] Login Successful! User: {user['email']}, Role: {user['role']}")
     else:
         print(f"[1] Registration Successful! User: {reg_data['user']['email']}, Role: {reg_data['user']['role']}")

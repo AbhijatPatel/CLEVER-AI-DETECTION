@@ -10,8 +10,8 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center">
-                <ShieldCheck className="w-5 h-5 text-white" />
+              <div className="w-9 h-9 rounded-xl overflow-hidden border border-cyan-500/30 shadow-glow bg-slate-950 flex items-center justify-center shrink-0">
+                <img src="/logo.jpg" alt="CLEVER AI Logo" className="w-full h-full object-cover" />
               </div>
               <span className="font-bold text-xl tracking-wider text-white">
                 CLEVER <span className="text-cyan-400">AI</span>

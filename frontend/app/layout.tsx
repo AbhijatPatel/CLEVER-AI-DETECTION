@@ -8,7 +8,11 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' }
 export const metadata: Metadata = {
   title: 'Clever AI | AI Content Intelligence & Digital Forensics Platform',
   description: 'Understand the authenticity of digital content. Analyze text, documents, images, audio, and video using explainable AI and digital forensics signals.',
-  keywords: ['AI detection', 'digital forensics', 'deepfake analysis', 'content intelligence', 'explainable AI', 'provenance']
+  keywords: ['AI detection', 'digital forensics', 'deepfake analysis', 'content intelligence', 'explainable AI', 'provenance'],
+  icons: {
+    icon: '/logo.jpg',
+    apple: '/logo.jpg'
+  }
 };
 
 export default function RootLayout({

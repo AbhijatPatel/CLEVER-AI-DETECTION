@@ -24,7 +24,7 @@ class ApiClient {
     localStorage.removeItem('clever_user');
   }
 
-  private async request(endpoint: string, options: RequestInit = {}): Promise<any> {
+  public async request(endpoint: string, options: RequestInit = {}): Promise<any> {
     const token = this.getAccessToken();
     const headers = new Headers(options.headers || {});
 

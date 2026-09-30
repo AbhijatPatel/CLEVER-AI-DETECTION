@@ -44,8 +44,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center shadow-glow group-hover:scale-105 transition-transform">
-            <ShieldCheck className="w-6 h-6 text-white" />
+          <div className="w-10 h-10 rounded-xl overflow-hidden border border-cyan-500/30 shadow-glow group-hover:scale-105 transition-transform bg-slate-950 flex items-center justify-center shrink-0">
+            <img src="/logo.jpg" alt="CLEVER AI Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="font-bold text-xl tracking-wider text-white">CLEVER</span>
@@ -65,8 +65,8 @@ export default function Navbar() {
           <Link href="/#forensics" className="hover:text-cyan-400 transition-colors">
             Forensics
           </Link>
-          <Link href="/#security" className="hover:text-cyan-400 transition-colors">
-            Security
+          <Link href="/demo" className="hover:text-cyan-400 transition-colors text-cyan-400/80">
+            Live Demo
           </Link>
           <Link href="/docs" className="hover:text-cyan-400 transition-colors">
             API Docs

@@ -35,8 +35,8 @@ export default function LoginPage() {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <Link href="/" className="flex items-center justify-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center shadow-glow">
-            <ShieldCheck className="w-6 h-6 text-white" />
+          <div className="w-10 h-10 rounded-xl overflow-hidden border border-cyan-500/30 shadow-glow bg-slate-950 flex items-center justify-center shrink-0">
+            <img src="/logo.jpg" alt="CLEVER AI Logo" className="w-full h-full object-cover" />
           </div>
           <span className="font-bold text-2xl tracking-wider text-white">
             CLEVER <span className="text-cyan-400">AI</span>
