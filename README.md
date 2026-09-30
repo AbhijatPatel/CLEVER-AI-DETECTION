@@ -1,102 +1,169 @@
 <div align="center">
 
+<img src="./frontend/public/logo.jpg" alt="CLEVER AI Logo" width="180" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);" />
+
 # 🛡️ CLEVER AI
 ### AI Content Intelligence & Digital Forensics Platform
 **"Understand the authenticity of digital content."**
 
-[![CI/CD Pipeline](https://github.com/clever-ai/clever-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/clever-ai/clever-ai/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Next.js 14](https://img.shields.io/badge/Next.js-14.2-black)](https://nextjs.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Python-009688.svg)](https://fastapi.tiangolo.com)
-[![Node.js](https://img.shields.io/badge/Node.js-Express%20TS-green.svg)](https://nodejs.org)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://docker.com)
+[![Live Frontend (Vercel)](https://img.shields.io/badge/Vercel-Live%20App-black?style=for-the-badge&logo=vercel)](https://frontend-kohl-five-69.vercel.app)
+[![Live API (Render)](https://img.shields.io/badge/Render-API%20Gateway-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://clever-ai-api.onrender.com/api/v1/health)
+[![AI Engine (FastAPI)](https://img.shields.io/badge/FastAPI-Forensics%20Engine-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://clever-ai-engine.onrender.com/health)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/AbhijatPatel/CLEVER-AI-DETECTION)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
+<br/>
+
+[**🌐 Live Application**](https://frontend-kohl-five-69.vercel.app) • [**⚡ Try Live Demo**](https://frontend-kohl-five-69.vercel.app/demo) • [**📖 API Documentation**](https://clever-ai-api.onrender.com/api-docs) • [**🐛 Report Bug**](https://github.com/AbhijatPatel/CLEVER-AI-DETECTION/issues)
 
 </div>
 
 ---
 
-## 📌 1. Product Vision
+## 📌 Executive Summary
 
-**Clever AI** is a serious, production-grade, multi-modal content intelligence and digital forensics SaaS platform. Rather than making black-box, definitive claims of "100% AI generation," Clever AI empowers investigators, educators, legal analysts, and enterprise security teams with **transparent, explainable evidence signals**.
-
-### Core Modalities
-1. **Text Intelligence**: Stylometrics, Type-Token Ratio (TTR), sentence length variation (burstiness), n-gram repetition, and transitional marker density.
-2. **Document Forensics**: PDF and DOCX structural extraction, page-level mapping, and author/creator metadata verification.
-3. **Image Forensics**: Camera EXIF hardware tags, Error Level Analysis (ELA) compression gradient inspection, and diffusion model dimension checks.
-4. **Audio Forensics**: Synthetic voice indicators, neural vocoder frequency cutoffs, and acoustic modulation cadence.
-5. **Video & Deepfake Analysis**: Frame-by-frame temporal consistency, facial boundary warping, and audio-visual lip sync coherence.
+**Clever AI** is an enterprise-grade multi-modal content intelligence and digital forensics SaaS platform. Rather than acting as a black-box percentage counter that claims "100% mathematical certainty", Clever AI functions as a **forensic evidence workbench** that extracts explainable signals across text, documents, images, audio, and video to augment human investigators, academic integrity bodies, legal analysts, and enterprise trust & safety teams.
 
 ---
 
-## 🏗️ 2. High-Level Architecture
+## 🌐 Live Production Deployments
+
+| Component | Platform | Endpoint / URL | Operational Status |
+| :--- | :--- | :--- | :--- |
+| **Frontend Web App** | **Vercel** | [https://frontend-kohl-five-69.vercel.app](https://frontend-kohl-five-69.vercel.app) | 🟢 **Live (HTTP 200)** |
+| **Interactive Demo** | **Vercel** | [https://frontend-kohl-five-69.vercel.app/demo](https://frontend-kohl-five-69.vercel.app/demo) | 🟢 **Live (No auth needed)** |
+| **API Gateway** | **Render** | [https://clever-ai-api.onrender.com/api/v1/health](https://clever-ai-api.onrender.com/api/v1/health) | 🟢 **Live (Express TS)** |
+| **Forensics Engine** | **Render** | [https://clever-ai-engine.onrender.com/health](https://clever-ai-engine.onrender.com/health) | 🟢 **Live (FastAPI Python)** |
+| **Swagger UI** | **Render** | [https://clever-ai-api.onrender.com/api-docs](https://clever-ai-api.onrender.com/api-docs) | 🟢 **Live OpenAPI 3.0** |
+
+---
+
+## 🔬 Multi-Modal Forensic Capabilities
 
 ```
-                     ┌───────────────┐
-                     │     USER      │
-                     └───────┬───────┘
-                             │
-                             ▼
-                     ┌───────────────┐
-                     │    VERCEL     │
-                     │ Next.js/React │
-                     │   FRONTEND    │
-                     └───────┬───────┘
-                             │ HTTPS / REST
-                             ▼
-                     ┌───────────────┐
-                     │    RENDER     │
-                     │ Node/Express  │
-                     │   API GATEWAY │
-                     └───────┬───────┘
-                             │
-             ┌───────────────┼────────────────┐
-             │               │                │
-             ▼               ▼                ▼
-      MongoDB Atlas        Redis         FastAPI Engine
-      (Source of Record)  (BullMQ)       (Python / ML)
-                                              │
-                                              ▼
-                                         Ensemble &
-                                         Calibration
+                                  ┌───────────────────────────┐
+                                  │   DIGITAL MEDIA INPUT     │
+                                  └─────────────┬─────────────┘
+                                                │
+         ┌──────────────────┬───────────────────┼───────────────────┬──────────────────┐
+         ▼                  ▼                   ▼                   ▼                  ▼
+   ┌───────────┐      ┌───────────┐       ┌───────────┐       ┌───────────┐      ┌───────────┐
+   │   TEXT    │      │ DOCUMENTS │       │  IMAGES   │       │   AUDIO   │      │   VIDEO   │
+   │ Perplexity│      │ Structure │       │  Camera   │       │ Synthetic │      │ Frame-by- │
+   │Burstiness │      │ Revision  │       │   EXIF    │       │  Vocoder  │      │   Frame   │
+   │ Stylometry│      │ Page Maps │       │    ELA    │       │  Mel-Spec │      │ Deepfake  │
+   └───────────┘      └───────────┘       └───────────┘       └───────────┘      └───────────┘
+```
+
+### 1. 📝 Text Intelligence & Stylometry
+- **Perplexity & Burstiness Gauges**: Analyzes sentence-level token prediction variance and structural cadence.
+- **Type-Token Ratio (TTR)**: Vocabulary richness and lexical diversity profiling.
+- **Repetitive N-Gram Analysis**: Identifies statistical artifacts and syntactic loops characteristic of LLM generators.
+- **Transitional Marker Density**: Detects disproportionate distribution of formal transitional conjunctions.
+- **Interactive Sentence Heatmap**: Click-to-inspect sentence triage (Green = Human, Amber = Mixed, Red = AI-dominant).
+
+### 2. 📑 Document Forensics (`.pdf`, `.docx`, `.txt`)
+- **Metadata Extraction**: Identifies author software, creator timestamps, and PDF editing history.
+- **Page-Level Segmentation**: Granular inspection mapped across pages and multi-column layouts.
+- **Revision Artifacts**: Discrepancies between visible text layers and internal object streams.
+
+### 3. 🖼️ Image Forensics & Manipulation
+- **Error Level Analysis (ELA)**: Compression rate differential mapping across JPEG/PNG quantization blocks.
+- **Camera EXIF Verification**: Cross-references hardware tags, camera serials, lens parameters, and software editing signatures.
+- **Resolution & Aspect Ratio Heuristics**: Detects standard diffusion generation dimensions (e.g., Midjourney, DALL-E, Stable Diffusion defaults).
+
+### 4. 🎙️ Synthetic Audio & Speech
+- **Neural Vocoder Detection**: Identifies spectral artifacts, cutoffs above 16kHz, and phase mismatches.
+- **Acoustic Modulation Analysis**: Measures unnatural micro-pitch stability and lack of human breathing cadence.
+
+### 5. 🎥 Video & Deepfake Analysis
+- **Temporal Consistency**: Frame-to-frame boundary jitter and spatial coherence testing.
+- **Facial Landmark Warping**: Blending artifacts around facial perimeters, eyes, and teeth.
+- **Audio-Visual Lip Sync Discrepancies**: Phoneme-to-viseme timing correlation analysis.
+
+---
+
+## 🏛️ System Architecture
+
+```
+                   ┌─────────────────────────────────────────┐
+                   │           INVESTIGATOR / CLIENT         │
+                   └────────────────────┬────────────────────┘
+                                        │
+                                        ▼
+                   ┌─────────────────────────────────────────┐
+                   │          VERCEL (EDGE RUNTIME)          │
+                   │   Next.js 14 App Router • Tailwind CSS  │
+                   │  Sentence Heatmaps • Real-time Charts   │
+                   └────────────────────┬────────────────────┘
+                                        │ HTTPS / REST API
+                                        ▼
+                   ┌─────────────────────────────────────────┐
+                   │          RENDER (API GATEWAY)           │
+                   │      Node.js 20 • Express • TypeScript  │
+                   │   JWT Auth • RBAC • Rate Limiter • Zod   │
+                   └──────┬───────────────────┬──────────────┘
+                          │                   │
+         ┌────────────────┴──────┐            │ Redis Job Queue
+         ▼                       ▼            ▼
+  ┌──────────────┐       ┌──────────────┐   ┌──────────────────────┐
+  │ MongoDB Atlas│       │ AWS S3 / MinIO│   │ RENDER (BULL WORKER) │
+  │ Immutable    │       │ Forensic     │   │ Asynchronous File    │
+  │ Audit Trail  │       │ Artifacts    │   │ Processing Pipeline  │
+  └──────────────┘       └──────────────┘   └──────────┬───────────┘
+                                                       │
+                                                       ▼
+                                            ┌──────────────────────┐
+                                            │ RENDER (AI SERVICE)  │
+                                            │ Python 3.11• FastAPI │
+                                            │ ELA•NLP•Stylometrics │
+                                            └──────────────────────┘
 ```
 
 ---
 
-## 💻 3. Technology Stack
+## 💻 Tech Stack Overview
 
-- **Frontend**: Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Lucide Icons.
-- **Backend API**: Node.js, Express.js, TypeScript, Mongoose, JWT (access + refresh), bcrypt, Zod, OpenAPI/Swagger.
-- **AI Engine**: Python 3.11, FastAPI, Uvicorn, Pillow, PyPDF, python-docx, Scikit-learn, NumPy.
-- **Worker & Queue**: BullMQ, Redis, standalone worker service.
-- **Database**: MongoDB Atlas.
-- **Reporting**: PDFKit (Certified 13-section digital forensics audit reports).
-- **Deployment**: Vercel (Frontend), Render (API, Engine, Worker), Docker Compose (Local Dev).
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | Next.js 14, React 18, TypeScript, Tailwind CSS, Lucide React, Dynamic CSS Animations |
+| **Backend API** | Node.js, Express.js, TypeScript, Mongoose, JWT (HttpOnly Cookies), Zod, Helmet |
+| **AI Forensics** | Python 3.11, FastAPI, Uvicorn, Pillow (ELA), Scikit-Learn, NumPy, PyPDF, python-docx |
+| **Background Processing** | BullMQ, Redis 7, Standalone Worker Daemon |
+| **Data & Storage** | MongoDB Atlas (Multi-Tenant Schemas), AWS S3 / Local Storage Provider |
+| **Forensic Export** | PDFKit (13-Section Certified Legal Audit PDF Reports) |
+| **DevOps & CI/CD** | Vercel, Render Blueprints, Docker & Docker Compose, GitHub Actions |
 
 ---
 
-## 🚀 4. Quick Start & Local Development
+## ⚡ Quickstart Guide
 
-### Prerequisites
-- Node.js >= 20.x
-- Python >= 3.11
-- Docker Desktop (Optional for containerized run)
+### Option 1: Docker Compose (All-in-One Local Stack)
 
-### Running with Docker Compose
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_ORG/clever-ai.git
-cd clever-ai
+git clone https://github.com/AbhijatPatel/CLEVER-AI-DETECTION.git
+cd CLEVER-AI-DETECTION
 
-# Start all 6 services (Frontend, Backend, AI Engine, Worker, MongoDB, Redis)
-docker-compose up --build
+# Launch all 6 services with one command
+docker-compose up -d --build
 ```
-- Frontend: `http://localhost:3000`
-- Backend API & Swagger: `http://localhost:5000/docs`
-- AI Engine: `http://localhost:8000/docs`
 
-### Running Locally without Docker
+- **Frontend Workbench:** `http://localhost:3000`
+- **Express API Gateway:** `http://localhost:5000`
+- **FastAPI Forensics Engine:** `http://localhost:8000`
+- **Swagger Documentation:** `http://localhost:5000/api-docs`
 
-#### 1. Start AI Engine (FastAPI)
+---
+
+### Option 2: Bare-Metal Local Development
+
+#### Prerequisites
+- Node.js >= 20.x
+- Python >= 3.11
+- MongoDB & Redis instances running locally
+
+#### 1. Start Python Forensics Engine
 ```bash
 cd ai-service
 pip install -r requirements.txt
@@ -104,119 +171,97 @@ python main.py
 # Runs on http://localhost:8000
 ```
 
-#### 2. Start Backend API
+#### 2. Start Backend API Gateway
 ```bash
 cd backend
 npm install
-npm run build
-npm start
+npm run dev
 # Runs on http://localhost:5000
 ```
 
-#### 3. Start Frontend
+#### 3. Start Next.js Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
-# Accessible at http://localhost:3000
+# Runs on http://localhost:3000
 ```
 
 ---
 
-## 🧪 5. Testing & Quality Verification
+## 🧪 Testing & Verification Suite
 
-### Run AI Engine Tests
-```bash
-python -m pytest ai-service/tests/
-```
-Output:
-```text
-ai-service\tests\test_api.py .... [100%]
-4 passed in 0.92s
-```
-
-### Run Backend Integration Tests
+### Automated Backend Tests (Jest & Supertest)
 ```bash
 cd backend
-npm test -- --runInBand --forceExit
+npm test
 ```
-Output:
 ```text
 PASS tests/api.test.ts
-  Clever AI Backend API Health & Security Tests
-    √ GET /api/v1/health should return healthy status
-    √ GET /api/v1/ready should return ready status
-    √ Protected route /api/v1/auth/me should reject unauthenticated requests with 401
-    √ POST /api/v1/auth/register should validate invalid email format
+  Clever AI Backend API — Health & Security Tests
+    √ GET /api/v1/health → returns 200 with healthy status (66 ms)
+    √ GET /api/v1/ready → returns 200 with ready flag (15 ms)
+    √ GET /api/v1/auth/me (unauthenticated) → returns 401 (17 ms)
+    √ POST /api/v1/analysis/text (unauthenticated) → returns 401 (46 ms)
+    √ POST /api/v1/auth/register with invalid email → returns 400 (40 ms)
+    √ POST /api/v1/auth/login with missing credentials → returns 400 (22 ms)
+    √ GET /api/v1/analysis with fake Bearer token → returns 401 (10 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       7 passed, 7 total
 ```
 
-### Verify Frontend Production Build
+### Next.js Production Build Test
 ```bash
 cd frontend
 npm run build
 ```
-Output:
 ```text
 ✓ Compiled successfully
-✓ Generating static pages (17/17)
+✓ Generating static pages (18/18)
 ```
 
 ---
 
-## 📊 6. Model Evaluation & Explainability
+## 📋 Certified 13-Section Forensic PDF Reports
 
-Clever AI adheres strictly to truth in machine learning:
-- **Never Fabricates Metrics**: When real ML models are in training or development, a labeled `MockModelProvider` is used, tagged with `isDemoAnalysis: true`.
-- **Probabilistic Evidence**: AI-generation signals and human-like signals are reported as likelihood distributions summing to ~100%, with explicit confidence levels (*Low*, *Medium*, *High*).
-- **Sentence-Level Highlighting**: Every sentence provides click-to-inspect evidence details, including vocabulary density and transitional phrasing.
+Every forensic investigation conducted on Clever AI can be exported as a certified, tamper-evident 13-section audit document:
 
----
-
-## 📋 7. Certified Forensic PDF Reports
-
-Every completed analysis job can be exported as a certified 13-section forensic PDF report:
-1. Executive Forensic Summary
-2. File Information
-3. Analysis Configuration
-4. Detection Likelihood Distribution
-5. Sentence-Level Breakdown
-6. Stylometric Writing Fingerprint
-7. Provenance & Metadata Details
-8. Cryptographic SHA-256 Digest
-9. Key Forensic Evidence Signals
-10. Model Information & Versioning
-11. Mandatory Forensic Limitations Statement
-12. Investigator Manual Review Guidance
-13. Immutable Chain of Custody Footer
+1. **Executive Forensic Summary**: High-level verdict, confidence classification, and probability spread.
+2. **File & Artifact Information**: File name, byte size, MIME type, and structural classification.
+3. **Cryptographic Integrity Digest**: SHA-256 and MD5 fingerprinting of analyzed artifacts.
+4. **Investigation Configuration**: Model version, threshold tolerances, and active inspection engines.
+5. **Detection Likelihood Distribution**: Probability breakdown (`Human`, `AI-Generated`, `Hybrid/Transformed`).
+6. **Sentence-Level Heatmap Audit**: Granular sentence-by-sentence telemetry table.
+7. **Stylometric Profile**: Lexical diversity (TTR), sentence burstiness, and syntactic cadence.
+8. **Repetition & Perplexity Index**: Frequency spectrum of repetitive n-grams.
+9. **Provenance & Header Metadata**: EXIF, author software, and modification timeline.
+10. **Evidence Signal Matrix**: Ranked list of positive and negative anomaly indicators.
+11. **Model Governance & Explainability**: Disclosure of algorithms, heuristic weights, and calibration data.
+12. **Investigator Guidance Notes**: Recommended next steps and manual review protocols.
+13. **Chain of Custody & Legal Disclaimer**: Timestamped examiner sign-off and legal evidentiary disclaimers.
 
 ---
 
-## 🔒 8. Security & Privacy Principles
+## 🔒 Security, Compliance & Ethical AI
 
-- **Zero Content Training**: User documents are never ingested into model training datasets.
-- **RBAC**: Multi-tenant organizations with Admin, Manager, Analyst, and Member roles enforced server-side.
-- **SHA-256 Integrity**: Real-time cryptographic hashing verifies that artifacts have not been tampered with.
-- **Audit Trails**: Every login, upload, analysis creation, and report export is immutably logged with request IDs.
-
----
-
-## 📄 9. Mandatory Forensic Disclaimer
-
-> **AI-content analysis is probabilistic and can produce false positives and false negatives. Results should be interpreted as evidence signals and reviewed in context rather than treated as definitive proof of authorship, manipulation, or AI generation.**
+- **Zero Content Training Policy**: User text, documents, and media submitted for analysis are **NEVER** used to train AI models.
+- **Role-Based Access Control (RBAC)**: Strict permission boundaries for `Admin`, `Manager`, `Analyst`, and `Member`.
+- **Cryptographic Reset Tokens**: Secure SHA-256 hashed password reset flow with automated session invalidation.
+- **Immutable Audit Logging**: Every login, report export, file upload, and permission change is recorded with request IDs and IP addresses.
+- **C2PA Standard Ready**: Architected to ingest and verify Content Authenticity Initiative (C2PA) cryptographic manifests.
 
 ---
 
-## 🗺️ 10. Roadmap
+## ⚖️ Legal & Forensic Disclaimer
 
-- [x] Phase 1 - Architecture, Foundation & Docker
-- [x] Phase 2 - JWT & RBAC Authentication
-- [x] Phase 3 - Forensics Operations Dashboard
-- [x] Phase 4 - Text Intelligence & Stylometry Engine
-- [x] Phase 5 - 13-Section Forensic PDF Report Generator
-- [x] Phase 6 - Document Forensics (PDF & DOCX)
-- [x] Phase 7 - Image Forensics (EXIF & Error Level Analysis)
-- [x] Phase 8 - Audio & Video Forensics Pipelines
-- [x] Phase 9 - Developer API & OpenAPI/Swagger Docs
-- [x] Phase 10 - Enterprise Team & Immutable Audit Logs
-- [ ] C2PA Content Credentials Signing Integration
-- [ ] Hardware-Accelerated Video Frame OCR
+> **IMPORTANT FORENSIC NOTICE:** Automated content detection tools provide probabilistic statistical indicators and forensic evidence signals. They are designed to assist human analysts, investigators, and reviewers. Clever AI does not claim 100% mathematical certainty. Analysis outputs should always be evaluated alongside contextual evidence, human editorial review, and proper chain of custody procedures.
+
+---
+
+## 📄 License & Attribution
+
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for complete terms.
+
+Designed and developed for **Clever AI Technologies**.  
+Maintained by [Abhijat Patel](https://github.com/AbhijatPatel).
