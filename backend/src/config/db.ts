@@ -8,12 +8,7 @@ export async function connectDB(): Promise<void> {
     });
     console.log(`[Database] Connected to MongoDB at ${config.mongodbUri.split('@')[1] || config.mongodbUri}`);
   } catch (error) {
-    if (config.nodeEnv !== 'production') {
-      console.warn('[Database] Notice: Local MongoDB not detected on port 27017. API server running in local dev mode.');
-    } else {
-      console.error('[Database] Fatal MongoDB connection error in production:', error);
-      throw error;
-    }
+    console.warn('[Database] Notice: MongoDB unreachable or connection timed out. Server continuing to operate.', error);
   }
 
   mongoose.connection.on('disconnected', () => {
