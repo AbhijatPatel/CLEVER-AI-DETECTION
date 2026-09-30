@@ -1,0 +1,64 @@
+services:
+  # 1. Express API Gateway Server
+  - type: web
+    name: clever-ai-api
+    env: node
+    plan: starter
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: AI_SERVICE_URL
+        fromService:
+          type: web
+          name: clever-ai-engine
+          property: host
+      - key: FRONTEND_URL
+        value: https://clever-ai.vercel.app
+
+  # 2. FastAPI AI Forensics Service
+  - type: web
+    name: clever-ai-engine
+    env: python
+    plan: starter
+    rootDir: ai-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: MODEL_PROVIDER
+        value: heuristic
+      - key: LOG_LEVEL
+        value: info
+
+  # 3. Background BullMQ Worker
+  - type: worker
+    name: clever-ai-worker
+    env: node
+    plan: starter
+    rootDir: worker
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: AI_SERVICE_URL
+        fromService:
+          type: web
+          name: clever-ai-engine
+          property: host

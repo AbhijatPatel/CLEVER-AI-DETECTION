@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: clever-ai-mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: clever-ai-redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: clever-ai-engine
+    restart: always
+    ports:
+      - '8000:8000'
+    environment:
+      - PORT=8000
+      - MODEL_PROVIDER=heuristic
+    depends_on:
+      - redis
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: clever-ai-api
+    restart: always
+    ports:
+      - '5000:5000'
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongodb:27017/clever_ai
+      - REDIS_URL=redis://redis:6379
+      - AI_SERVICE_URL=http://ai-service:8000
+      - FRONTEND_URL=http://localhost:3000
+      - JWT_SECRET=clever_ai_jwt_super_secure_access_secret_2026
+      - JWT_REFRESH_SECRET=clever_ai_jwt_super_secure_refresh_secret_2026
+    depends_on:
+      - mongodb
+      - redis
+      - ai-service
+
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    container_name: clever-ai-worker
+    restart: always
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/clever_ai
+      - REDIS_URL=redis://redis:6379
+      - AI_SERVICE_URL=http://ai-service:8000
+    depends_on:
+      - mongodb
+      - redis
+      - ai-service
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: clever-ai-web
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
+  redis-data:
