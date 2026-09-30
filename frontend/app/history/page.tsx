@@ -16,8 +16,10 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { api } from '@/lib/api';
+import { useAuth } from '@/lib/useAuth';
 
 export default function HistoryPage() {
+  const { loading: authLoading } = useAuth(true);
   const [items, setItems] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -69,7 +71,7 @@ export default function HistoryPage() {
     <div className="flex min-h-screen bg-slate-950 text-slate-100">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto md:pt-0 pt-14">
         <DashboardHeader
           title="Investigation History"
           subtitle="Audit trail of previous forensic examinations, tamper checks, and reports"

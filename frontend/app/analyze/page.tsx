@@ -20,11 +20,13 @@ import {
   Lock
 } from 'lucide-react';
 import { api } from '@/lib/api';
+import { useAuth } from '@/lib/useAuth';
 
 type Modality = 'text' | 'document' | 'image' | 'audio' | 'video';
 
 export default function AnalyzePage() {
   const router = useRouter();
+  const { loading: authLoading } = useAuth(true);
   const [activeTab, setActiveTab] = useState<Modality>('text');
 
   // Text state
@@ -130,7 +132,7 @@ export default function AnalyzePage() {
     <div className="flex min-h-screen bg-slate-950 text-slate-100">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto md:pt-0 pt-14">
         <DashboardHeader
           title="Create New Forensic Analysis"
           subtitle="Select content modality and initiate multi-signal authenticity inspection"

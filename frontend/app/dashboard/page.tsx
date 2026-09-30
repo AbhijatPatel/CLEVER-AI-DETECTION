@@ -18,11 +18,14 @@ import {
   Search,
   Plus,
   BarChart3,
-  ExternalLink
+  ExternalLink,
+  Loader2
 } from 'lucide-react';
 import { api } from '@/lib/api';
+import { useAuth } from '@/lib/useAuth';
 
 export default function DashboardPage() {
+  const { loading: authLoading } = useAuth(true);
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,11 +45,22 @@ export default function DashboardPage() {
 
   const total = stats?.totalAnalyses || 0;
 
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen bg-slate-950 items-center justify-center">
+        <div className="text-center space-y-3">
+          <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mx-auto" />
+          <p className="text-xs text-slate-400">Authenticating...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen bg-slate-950 text-slate-100">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto md:pt-0 pt-14">
         <DashboardHeader
           title="Forensic Operations Center"
           subtitle="Real-time multi-modal content authentication and evidence dashboard"

@@ -39,7 +39,7 @@ export default function AuditLogsPage() {
     <div className="flex min-h-screen bg-slate-950 text-slate-100">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto md:pt-0 pt-14">
         <DashboardHeader
           title="Enterprise Audit Trails"
           subtitle="Immutable chronological compliance ledger recording logins, uploads, inspections, and report exports"
